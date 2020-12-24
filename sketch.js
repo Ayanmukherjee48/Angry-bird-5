@@ -38,14 +38,8 @@ function setup(){
 
     bird = new Bird(100,100);
     constrainedLog=new Log(150,150,70,PI/2);
-    var options ={
-        bodyA:bird.body,
-        bodyB:constrainedLog.body,
-        length:10,
-        stiffness:0.05
-    }
-    slingshot = Matter.Constraint.create(options)
-    World.add(world,slingshot)
+    sling = new Slingshot(bird.body,{x:100,y:100})
+
 }
 
 function draw(){
@@ -71,5 +65,21 @@ function draw(){
     constrainedLog.display();
     bird.display();
     platform.display();
-    line(bird.body.position.x,bird.body.position.y,constrainedLog.body.position.x,constrainedLog.body.position.y)
+    sling.display();
 }
+function mouseDragged(){
+    Matter.Body.setPosition(bird.body,{x:mouseX,y:mouseY})
+}
+function mouseReleased(){
+   sling.fly(); 
+}
+
+
+
+
+
+
+
+
+
+
